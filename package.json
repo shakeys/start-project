@@ -4,6 +4,7 @@
   "description": "react app consuming ms graph api",
   "private": true,
   "license": "MIT",
+
   "contributors": [],
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.10.2",
