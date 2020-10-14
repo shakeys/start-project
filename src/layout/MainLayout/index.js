@@ -6,7 +6,7 @@ import SideBar from "./SideBar";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    backgroundColor: theme.palette.background.default,
+    backgroundColor: theme.palette.common.white,
     width: "100%",
     padding: 0,
   },
@@ -18,20 +18,8 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
   },
   content: {
-    paddingTop: "80px",
-    paddingBottom: "3rem",
-    marginLeft: "auto",
-    marginRight: "auto",
-    marginTop: "75px",
-    width: 840,
-    [theme.breakpoints.down("sm")]: {
-      width: 540,
-      paddingTop: 20,
-    },
-    [theme.breakpoints.down("xs")]: {
-      width: "90%",
-      paddingBottom: "7rem",
-    },
+    marginLeft: "294px",
+    marginTop: "84px",
   },
 }));
 
@@ -43,6 +31,7 @@ const MainLayout = ({ children }) => {
       <div className={classes.wrapper}>
         <TopBar />
         <SideBar />
+
         <Box className={classes.content}>
           {children}
         </Box>

@@ -12,7 +12,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <Router history={history}>
         <Switch>
-          <Route path="/" component={MainPageView} />
+          <Route path="*" component={MainPageView} />
         </Switch>
       </Router>
     </ThemeProvider>

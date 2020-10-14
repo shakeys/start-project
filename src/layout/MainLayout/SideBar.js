@@ -19,7 +19,8 @@ const useStyles = makeStyles((_theme) => ({
     position: "fixed",
     width: "260px",
     height: "100%",
-    padding: "130px 2% 40px",
+    padding: "130px 20px 40px",
+    boxShadow: "inset -7px 0px 5px -2px rgba(0,0,0,0.10)",
   },
   button: {
     lineHeight: "normal",

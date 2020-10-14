@@ -11,8 +11,8 @@ const useStyles = makeStyles((_theme) => ({
   appbar: {
     backgroundColor: _theme.palette.common.white,
     display: "flex",
-    paddingLeft: "2%",
-    paddingRight: "2%",
+    paddingLeft: "20px",
+    paddingRight: "20px",
   },
   toolbar: {
     display: "flex",
