@@ -21,10 +21,10 @@ const useStyles = makeStyles((_theme) => ({
   mail: {
     borderBottom: `1px solid ${_theme.palette.grey[300]}`,
     padding: "20px",
-    color: _theme.palette.grey[500],
+    color: _theme.palette.grey[600],
     '&:hover': {
       cursor: "pointer",
-      backgroundColor: "#b3e5fc",
+      backgroundColor: _theme.palette.grey[400],
     },
   },
   unread: {
