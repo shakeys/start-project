@@ -1,6 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { withStyles, makeStyles, Modal, Backdrop, Fade, List, ListItem, ListItemText, ListSubheader, Typography } from "@material-ui/core";
+import {
+  withStyles,
+  makeStyles,
+  Modal,
+  Backdrop,
+  Fade,
+  List,
+  ListItem,
+  ListItemText,
+  ListSubheader,
+  Typography,
+} from "@material-ui/core";
 
 const useStyles = makeStyles((_theme) => ({
   modal: {
@@ -71,7 +82,7 @@ function CalendarListView({ open, handleClose, calendarListData }) {
       open={open}
       onClose={handleClose}
       closeAfterTransition
-      BackdropComponent={Backdrop}                                            
+      BackdropComponent={Backdrop}
       BackdropProps={{
         timeout: 500,
       }}
@@ -79,15 +90,26 @@ function CalendarListView({ open, handleClose, calendarListData }) {
       <Fade in={open}>
         <div className={classes.paper}>
           <List className={classes.root} subheader={<li />}>
-            {[0, 1, 2, 3, 4].map((sectionId) => (
+            {[0, 1, 2, 3, 4, 5].map((sectionId) => (
               <li key={`section-${sectionId}`} className={classes.listSection}>
                 <ul className={classes.ul}>
-                  <ListSubheader className={classes.header}>{`Wednesday, Oct 15 ${sectionId}`}</ListSubheader>
+                  <ListSubheader
+                    className={classes.header}
+                  >{`Wednesday, Oct 15 ${sectionId}`}</ListSubheader>
                   {[0, 1, 2].map((item) => (
                     <MuiListItem key={`item-${sectionId}-${item}`}>
                       <MuiListItemText
-                        primary={`Item ${item}`} 
-                        secondary={<Typography variant="body2" component="label" className={classes.secondary}>Im secondary text for calendar events Im secondary text for calendar events  </Typography>}
+                        primary={`Item ${item}`}
+                        secondary={
+                          <Typography
+                            variant="body2"
+                            component="label"
+                            className={classes.secondary}
+                          >
+                            Im secondary text for calendar events Im secondary
+                            text for calendar events{" "}
+                          </Typography>
+                        }
                       />
                     </MuiListItem>
                   ))}
