@@ -4,12 +4,16 @@
   "description": "react app consuming ms graph api",
   "private": true,
   "license": "MIT",
-
   "contributors": [],
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.10.2",
+    "@material-ui/core": "^4.11.0",
+    "@material-ui/icons": "^4.9.1",
     "@microsoft/microsoft-graph-client": "^1.7.0",
     "bootstrap": "^4.3.1",
+    "clsx": "^1.1.1",
+    "helmet": "^4.1.1",
+    "history": "^5.0.0",
     "jquery": "^3.4.1",
     "popper.js": "^1.14.7",
     "react": "16.9.0",

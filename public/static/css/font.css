@@ -1,0 +1,10 @@
+/* fonts */
+@font-face {
+  font-family: "SharpSans-Medium";
+  src: url(/static/media/SharpSans-Medium.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "SharpSansDispNo1-Medium";
+  src: url(/static/media/SharpSansDispNo1-Medium.otf);
+}
