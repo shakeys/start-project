@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import clsx from "clsx";
 import { Box, makeStyles, Grid, Button, Divider } from "@material-ui/core";
 import CreateIcon from "@material-ui/icons/Create";
@@ -9,6 +9,8 @@ import FolderIcon from "@material-ui/icons/Folder";
 import DeleteIcon from "@material-ui/icons/Delete";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import EventNoteIcon from "@material-ui/icons/EventNote";
+
+import CalendarListView from "../../views/CalendarListView";
 
 const useStyles = makeStyles((_theme) => ({
   sidebar: {
@@ -44,6 +46,12 @@ const useStyles = makeStyles((_theme) => ({
 
 function Sidebar({ match }) {
   const classes = useStyles();
+  const [openCalendar, setOpenCalendar] = useState(false);
+  const data = useState([]);
+
+  const showCalendarModal = () => {
+    setOpenCalendar(!openCalendar);
+  };
 
   return (
     <Box component="div" className={classes.sidebar}>
@@ -99,19 +107,21 @@ function Sidebar({ match }) {
 
           <Grid item container spacing={2} direction="row" xs={12}>
             <Grid item xs={3}>
-              <Button className={classes.iconBtn} fullWidth disableElevation color="secondary" variant="outlined">
+              <Button  className={classes.iconBtn} fullWidth disableElevation color="secondary" variant="outlined">
                 <AssignmentIcon />
               </Button>
             </Grid>
             
             <Grid item xs={3}>
-              <Button className={classes.iconBtn} fullWidth disableElevation color="secondary" variant="outlined">
+              <Button onClick={showCalendarModal} className={classes.iconBtn} fullWidth disableElevation color="secondary" variant="outlined">
                 <EventNoteIcon />
               </Button>
             </Grid>
           </Grid>
         </Grid>
       </Grid>
+
+      <CalendarListView open={openCalendar} handleClose={showCalendarModal} calendarListData={data}/>
     </Box>
   )
 }
