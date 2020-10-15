@@ -103,18 +103,18 @@ const  MainPageView = () => {
 
   useEffect(() => {
      const emails =  getEmails().then(res => {
-      setLoading(false);
+       setLoading(false);
        setFetched(true);
        setEmails(res.value)
      })
-  
+     console.log(isLoading)
   },[fetched]);
 
   return (
     <MainLayout>
       <MailList>
         
-        <Grid className={classes.loaderContainer}>
+        <Grid container>
         {isLoading &&
           <Grid item xs={12}>
             <span>Extracing Data Please Wait...</span>
