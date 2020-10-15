@@ -1,10 +1,14 @@
-import React from "react";
+import React, {useEffect,useState} from "react";
 import clsx from "clsx";
 import { withStyles, Box, makeStyles, Grid, Typography, Button } from "@material-ui/core";
 import FlagIcon from '@material-ui/icons/Flag';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 import MainLayout from "../layout/MainLayout";
+import { authProvider } from '../authProvider';
+import { getUserEmail } from '../services/GraphService';
+
+import moment from "moment";
 
 const MailList = withStyles((_theme) => ({
   root: {
@@ -75,16 +79,70 @@ const useStyles = makeStyles((_theme) => ({
   flagBtn: {
     color: _theme.palette.success.main,
   },
+  loaderContainer: {
+    display:'flex',
+    justifyContent:'center',
+    alignItems:'center'
+  }
 }));
 
-function MainPageView() {
+const  MainPageView = () => {
   const classes = useStyles();
+
+  const [emailsArr,setEmails] = useState([]);
+  const [fetched,setFetched] = useState(false);
+  const [isLoading,setLoading] = useState(false);
+
+  const getEmails = async () => {
+      setLoading(true);
+      const token = await authProvider.getAccessToken();
+      const emails = getUserEmail(token).then(res => {return res})
+      return emails;
+      
+  } 
+
+  useEffect(() => {
+     const emails =  getEmails().then(res => {
+      setLoading(false);
+       setFetched(true);
+       setEmails(res.value)
+     })
+  
+  },[fetched]);
 
   return (
     <MainLayout>
       <MailList>
-        <Grid container>
+        
+        <Grid className={classes.loaderContainer}>
+        {isLoading &&
           <Grid item xs={12}>
+            <span>Extracing Data Please Wait...</span>
+          </Grid>
+        }
+        {isLoading === false && emailsArr.map((mail, index) => (
+           <Grid key={index} item xs={12}>
+            <Box className={clsx(classes.mail, !mail.isRead && classes.unread)}>
+              <Box className={classes.mailerHeader}>
+                <Typography variant="h5" component="p" className={classes.mailerName}>{mail.sender.emailAddress.name}</Typography>
+                <Typography variant="subtitle2" component="p" className={classes.mailerTime}>{moment(mail.receivedDateTime).fromNow()}</Typography>
+              </Box>
+              <Box className={classes.mailerHeader}>
+                <Typography variant="subtitle2" component="p">{mail.sender.emailAddress.address}</Typography>
+                <Box>
+                  <Button type="text" className={clsx(classes.iconBtn, classes.flagBtn)}><FlagIcon className={classes.iconSize} /></Button>
+                  <Button type="text" className={clsx(classes.iconBtn, classes.trashBtn)}><DeleteIcon className={classes.iconSize} /></Button>
+                </Box>
+              </Box>
+
+              <Box pt={1} component="div" className={classes.subject}>
+                <Typography variant="body1" component="label">{mail.bodyPreview}</Typography>
+              </Box>
+            </Box>
+          </Grid>
+        ))}
+
+         { /* <Grid item xs={12}>
             <Box className={clsx(classes.mail, classes.unread)}>
               <Box className={classes.mailerHeader}>
                 <Typography variant="h5" component="p" className={classes.mailerName}>Ronnel Dela Cruz</Typography>
@@ -124,7 +182,7 @@ function MainPageView() {
                 <Typography variant="body1" component="label">Planning your first sprint in Rebar Sprints Planning your first sprint in Rebar Sprints</Typography>
               </Box>
             </Box>
-          </Grid>
+          </Grid> */}
         </Grid>
       </MailList>
     </MainLayout>

@@ -36,7 +36,7 @@ export async function getUserPhoto(userId, accessToken) {
 
 }
 
-export async function getUserEmail(userId, accessToken) {
+export async function getUserEmail(accessToken) {
 
     const client = graph.Client.init({
         authProvider: (done) => {
@@ -44,9 +44,9 @@ export async function getUserEmail(userId, accessToken) {
         }
     });
 
-    let res = await client.api('/users/25d251d7-f5c3-4f60-b9aa-72f079d32ba1/messages')
-	.select('sender,subject')
-	.get();
+    let res = await client.api('/me/messages').get();
+
+    return res;
 
 }
 
