@@ -144,11 +144,12 @@ function MainTableView() {
           title=""
           icons={tableIcons}
           options={{
+            pageSize: 10,
             search: false,
             headerStyle: { color: "#008dc9", fontSize: 14, padding: "5px" },
             cellStyle: { fontFamily: "SharpSansDispNo1-Medium", fontSize: 14, padding: "5px" }
           }}
-          pageSize={15}
+ 
           components={{
             Toolbar: props => (<div />),
             Container: props => <Paper {...props} elevation={0}/>
@@ -163,7 +164,7 @@ function MainTableView() {
             { 
               title: "Date",
               field: "date",
-              render: rowData => Moment(rowData.receivedDateTime).format('DD MMM YYYY, h:mm:ss a')},
+              render: rowData => Moment(rowData.receivedDateTime).format('DD MMM YYYY, h:mm a')},
             { 
               title: "Link",
               field: "webLink",
