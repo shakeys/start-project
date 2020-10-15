@@ -93,7 +93,7 @@ const  MainPageView = () => {
   const [fetched,setFetched] = useState(false);
   const [isLoading,setLoading] = useState(false);
 
-  const getEmails = async () => {
+  const getData = async () => {
       setLoading(true);
       const token = await authProvider.getAccessToken();
       const emails = getUserEmail(token).then(res => {return res})
@@ -102,7 +102,7 @@ const  MainPageView = () => {
   } 
 
   useEffect(() => {
-     const emails =  getEmails().then(res => {
+     const emails =  getData().then(res => {
        setLoading(false);
        setFetched(true);
        setEmails(res.value)
@@ -141,48 +141,6 @@ const  MainPageView = () => {
             </Box>
           </Grid>
         ))}
-
-         { /* <Grid item xs={12}>
-            <Box className={clsx(classes.mail, classes.unread)}>
-              <Box className={classes.mailerHeader}>
-                <Typography variant="h5" component="p" className={classes.mailerName}>Ronnel Dela Cruz</Typography>
-                <Typography variant="subtitle2" component="p" className={classes.mailerTime}>03:00 PM</Typography>
-              </Box>
-
-              <Box className={classes.mailerHeader}>
-                <Typography variant="subtitle2" component="p">ronnel@rebar.ph</Typography>
-                <Box>
-                  <Button type="text" className={clsx(classes.iconBtn, classes.flagBtn)}><FlagIcon className={classes.iconSize} /></Button>
-                  <Button type="text" className={clsx(classes.iconBtn, classes.trashBtn)}><DeleteIcon className={classes.iconSize} /></Button>
-                </Box>
-              </Box>
-
-              <Box pt={1} component="div" className={classes.subject}>
-                <Typography variant="body1" component="label">Planning your first sprint in Rebar Sprints Planning your first sprint in Rebar Sprints</Typography>
-              </Box>
-            </Box>
-          </Grid>
-
-          <Grid item xs={12}>
-            <Box className={clsx(classes.mail)}>
-              <Box className={classes.mailerHeader}>
-                <Typography variant="h5" component="p" className={classes.mailerName}>Ronnel Dela Cruz</Typography>
-                <Typography variant="subtitle2" component="p" className={classes.mailerTime}>03:00 PM</Typography>
-              </Box>
-
-              <Box className={classes.mailerHeader}>
-                <Typography variant="subtitle2" component="p">ronnel@rebar.ph</Typography>
-                <Box>
-                  <Button type="text" className={clsx(classes.iconBtn, classes.flagBtn)}><FlagIcon className={classes.iconSize} /></Button>
-                  <Button type="text" className={clsx(classes.iconBtn, classes.trashBtn)}><DeleteIcon className={classes.iconSize} /></Button>
-                </Box>
-              </Box>
-
-              <Box pt={1} component="div" className={classes.subject}>
-                <Typography variant="body1" component="label">Planning your first sprint in Rebar Sprints Planning your first sprint in Rebar Sprints</Typography>
-              </Box>
-            </Box>
-          </Grid> */}
         </Grid>
       </MailList>
     </MainLayout>

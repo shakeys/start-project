@@ -1,6 +1,13 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import PropTypes from "prop-types";
 import { withStyles, makeStyles, Modal, Backdrop, Fade, List, ListItem, ListItemText, ListSubheader, Typography } from "@material-ui/core";
+
+import { authProvider } from '../authProvider';
+import { getCalendarEvents } from '../services/GraphService';
+
+import moment from "moment";
+
+
 
 const useStyles = makeStyles((_theme) => ({
   modal: {
@@ -36,7 +43,7 @@ const useStyles = makeStyles((_theme) => ({
     fontWeight: "bold",
   },
   secondary: {
-    fontSize: 14,
+    fontSize: 13,
     color: _theme.palette.grey[500],
   },
 }));
@@ -62,8 +69,39 @@ const MuiListItemText = withStyles((_theme) => ({
   },
 }))(ListItemText);
 
-function CalendarListView({ open, handleClose, calendarListData }) {
+
+
+
+
+const CalendarListView = ({ open, handleClose, calendarListData }) => {
   const classes = useStyles();
+  const [eventsArr,setEvents] = useState([]);
+  const [eventsFiltered,setEventsFiltered] = useState([]);
+  const [fetched,setFetched] = useState(false);
+
+  const groupBy = key => array =>
+  array.reduce((objectsByKeyValue, obj) => {
+    const value = moment(obj[key].dateTime).format("MMDDYY");
+    objectsByKeyValue[value] = (objectsByKeyValue[value] || []).concat(obj);
+    return objectsByKeyValue;
+  }, {});
+  
+  const getEvents = async () => {
+    const token = await authProvider.getAccessToken();
+    const eventsData = getCalendarEvents(token).then(res => {return res})
+    return eventsData;
+  }
+
+  useEffect(() => {
+
+    const events = getEvents().then(res => {
+      setFetched(true);
+      setEvents(res.value);
+    })
+
+ },[fetched]);
+
+
 
   return (
     <Modal
@@ -79,18 +117,16 @@ function CalendarListView({ open, handleClose, calendarListData }) {
       <Fade in={open}>
         <div className={classes.paper}>
           <List className={classes.root} subheader={<li />}>
-            {[0, 1, 2, 3, 4].map((sectionId) => (
-              <li key={`section-${sectionId}`} className={classes.listSection}>
+            {eventsArr.map((event,index) => (
+              <li key={index} className={classes.listSection}>
                 <ul className={classes.ul}>
-                  <ListSubheader className={classes.header}>{`Wednesday, Oct 15 ${sectionId}`}</ListSubheader>
-                  {[0, 1, 2].map((item) => (
-                    <MuiListItem key={`item-${sectionId}-${item}`}>
+                  <ListSubheader className={classes.header}>{moment(event.start.dateTime).format("dddd, MMMM Do YYYY")}</ListSubheader>
+                    <MuiListItem>
                       <MuiListItemText
-                        primary={`Item ${item}`} 
-                        secondary={<Typography variant="body2" component="label" className={classes.secondary}>Im secondary text for calendar events Im secondary text for calendar events  </Typography>}
+                        primary={`${event.subject} @ ${moment(event.start.dateTime).format('h:mm a')}`} 
+                        secondary={<Typography variant="body2" component="label" className={classes.secondary}>{event.bodyPreview}</Typography>}
                       />
                     </MuiListItem>
-                  ))}
                 </ul>
               </li>
             ))}

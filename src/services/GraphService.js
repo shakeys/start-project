@@ -50,6 +50,22 @@ export async function getUserEmail(accessToken) {
 
 }
 
+
+export async function getCalendarEvents(accessToken) {
+
+    const client = graph.Client.init({
+        authProvider: (done) => {
+            done(null, accessToken.accessToken);
+        }
+    });
+
+    let res = await client.api('/me/events')
+	.select('subject,body,bodyPreview,organizer,attendees,start,end,location')
+	.get();
+    return res;
+
+}
+
 export async function getAllUsers(accessToken) {
     var url = 'https://graph.microsoft.com/v1.0/users'
 
