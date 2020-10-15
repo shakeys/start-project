@@ -30,7 +30,7 @@ const MainLayout = ({ children }) => {
     <div className={classes.root}>
       <div className={classes.wrapper}>
         <TopBar />
-        <SideBar />
+        {/* <SideBar /> */}
 
         <Box className={classes.content}>
           {children}

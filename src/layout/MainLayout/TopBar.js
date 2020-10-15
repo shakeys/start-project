@@ -1,8 +1,13 @@
 import React from "react";
-import { makeStyles, AppBar, Toolbar, Button, IconButton, Badge } from "@material-ui/core";
+import { makeStyles, AppBar, Toolbar, Button, IconButton, Box } from "@material-ui/core";
+import AddIcon from '@material-ui/icons/Add';
+import SettingsBackupRestoreIcon from '@material-ui/icons/SettingsBackupRestore';
+import MapIcon from '@material-ui/icons/Map';
+import CachedIcon from '@material-ui/icons/Cached';
+import GetAppIcon from '@material-ui/icons/GetApp';
+import PrintIcon from '@material-ui/icons/Print';
 import SettingsIcon from '@material-ui/icons/Settings';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import CloseIcon from '@material-ui/icons/Close';
 
 const useStyles = makeStyles((_theme) => ({
   root: {
@@ -24,10 +29,18 @@ const useStyles = makeStyles((_theme) => ({
     padding: 0,
   },
   logo: {
-    width: 150,
+    width: 60,
   },
   button: {
+    display: "flex",
+    alignItems: "center",
+    lineHeight: "normal",
     padding: 0,
+    fontFamily: "SharpSansDispNo1-Medium",
+    fontSize: 20,
+    fontWeight: "bold",
+    color: _theme.palette.primary.main,
+    textTransform: "unset",
   },
   sectionDesktop: {
     display: "flex",
@@ -42,22 +55,36 @@ export default function ButtonAppBar() {
       <AppBar position="fixed" className={classes.appbar} elevation={0} variant="outlined">
         <Toolbar className={classes.toolbar}>
           <Button type="text" className={classes.button}>
-            <img className={classes.logo} src="/images/who-logo.png" alt="Logo"/>
+            <img className={classes.logo} src="/images/who-logo-only.png" alt="Logo"/>
+            <Box component="span" ml={3}>
+              START Dashboard
+            </Box>
           </Button>
 
           <div className={classes.sectionDesktop}>
-            <IconButton color="primary" aria-label="show 4 new mails">
-              <Badge badgeContent={4} color="secondary">
-                <SettingsIcon />
-              </Badge>
+            <IconButton color="primary">
+              <AddIcon />
             </IconButton>
-            <IconButton color="primary" aria-label="show 17 new notifications">
-              <Badge badgeContent={17} color="secondary">
-                <NotificationsIcon />
-              </Badge>
+            <IconButton color="primary">
+              <SettingsBackupRestoreIcon />
             </IconButton>
-            <IconButton edge="end" color="secondary">
-              <AccountCircleIcon />
+            <IconButton color="primary">
+              <MapIcon />
+            </IconButton>
+            <IconButton color="primary">
+              <CachedIcon />
+            </IconButton>
+            <IconButton color="primary">
+              <GetAppIcon />
+            </IconButton>
+            <IconButton color="primary">
+              <PrintIcon />
+            </IconButton>
+            <IconButton color="primary">
+              <SettingsIcon />
+            </IconButton>
+            <IconButton color="primary">
+              <CloseIcon />
             </IconButton>
           </div>
         </Toolbar>
