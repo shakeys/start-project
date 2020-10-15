@@ -14,6 +14,12 @@ const theme = createMuiTheme({
       dark: "#7cb342",
       contrastText: "#ffffff",
     },
+    third: {
+      light: "#9ccc65",
+      main: "##8e44ad",
+      dark: "#7cb342",
+      contrastText: "#ffffff",
+    },
   },
   typography: {
     fontFamily: "SharpSansDispNo1-Medium",
