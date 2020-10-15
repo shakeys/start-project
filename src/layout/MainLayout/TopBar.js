@@ -16,8 +16,8 @@ const useStyles = makeStyles((_theme) => ({
   appbar: {
     backgroundColor: _theme.palette.common.white,
     display: "flex",
-    paddingLeft: "20px",
-    paddingRight: "20px",
+    paddingLeft: "60px",
+    paddingRight: "60px",
   },
   toolbar: {
     display: "flex",
@@ -62,28 +62,28 @@ export default function ButtonAppBar() {
           </Button>
 
           <div className={classes.sectionDesktop}>
-            <IconButton color="primary">
+            <IconButton color="primary" edge="end">
               <AddIcon />
             </IconButton>
-            <IconButton color="primary">
+            <IconButton color="primary" edge="end">
               <SettingsBackupRestoreIcon />
             </IconButton>
-            <IconButton color="primary">
+            <IconButton color="primary" edge="end">
               <MapIcon />
             </IconButton>
-            <IconButton color="primary">
+            <IconButton color="primary" edge="end">
               <CachedIcon />
             </IconButton>
-            <IconButton color="primary">
+            <IconButton color="primary" edge="end">
               <GetAppIcon />
             </IconButton>
-            <IconButton color="primary">
+            <IconButton color="primary" edge="end">
               <PrintIcon />
             </IconButton>
-            <IconButton color="primary">
+            <IconButton color="primary" edge="end">
               <SettingsIcon />
             </IconButton>
-            <IconButton color="primary">
+            <IconButton color="primary" edge="end">
               <CloseIcon />
             </IconButton>
           </div>

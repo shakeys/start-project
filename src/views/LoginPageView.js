@@ -1,15 +1,6 @@
 import React from "react";
-import clsx from "clsx";
-import {
-  withStyles,
-  Box,
-  makeStyles,
-  Grid,
-  Typography,
-  Button,
-} from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 import MsIcon from "../img/msicon.png";
-import { Class } from "@material-ui/icons";
 
 import { authProvider } from '../authProvider';
 
@@ -25,7 +16,7 @@ const useStyles = makeStyles((_theme) => ({
     display: "flex",
     cursor: "pointer",
     "&:hover": {
-        backgroundColor: '#ededed'
+      backgroundColor: '#ededed'
     }
   },
   msButtonIcon: {
@@ -54,21 +45,19 @@ const useStyles = makeStyles((_theme) => ({
   },
 }));
 
+const LoginPageView = () => {
+  const classes = useStyles();
 
-
-const MainPageView = () => {
- const classes = useStyles();
-
- const login = () => {
-     authProvider.login();
-}
+  const login = () => {
+    authProvider.login();
+  }
 
   return (
     <div className={classes.container}>
       <div className={classes.loginContainer}>
         <img className={classes.logo} src="/images/who-logo.png" alt="Logo" />
         <div onClick={() => login()} className={classes.msButtonContainer}>
-          <img className={classes.msButtonIcon} src={MsIcon} />
+          <img className={classes.msButtonIcon} src={MsIcon} alt="Logo" />
           <span className={classes.msButtonText}>Sign In using your Microsoft Account</span>
         </div>
       </div>
@@ -76,4 +65,4 @@ const MainPageView = () => {
   );
 }
 
-export default MainPageView;
+export default LoginPageView;
