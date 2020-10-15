@@ -1,6 +1,6 @@
 import React, { forwardRef, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { withStyles, Box, Paper, Checkbox, IconButton } from "@material-ui/core";
+import { withStyles, Box, Paper, Checkbox, IconButton, Chip } from "@material-ui/core";
 
 import AddBox from "@material-ui/icons/AddBox";
 import ArrowDownward from "@material-ui/icons/ArrowDownward";
@@ -70,6 +70,7 @@ function MainTableView() {
        setLoading(false);
        setFetched(true);
        setEmails(res.value)
+       console.log(res.value);
      })
      console.log(isLoading)
   },[fetched]);
@@ -107,11 +108,27 @@ function MainTableView() {
               sorting: false,
               render: rowData => <IconButton edge="start" color="primary" onClick={() => history.push(rowData.webLink)}><LaunchIcon /></IconButton>,
             },
-            { title: "Item", field: "item" },
-            { title: "Tags", field: "tags" },
-            { title: "Priority", field: "priority" },
-            { title: "Mandatory/Optional", field: "mandatory" },
-            { title: "Work/Personal", field: "work" },
+            { title: "Item", field: "subject" },
+            { 
+              title: "Tags",
+              field: "tags",
+              render: rowData => <Chip label="Outlook" color="primary" />,
+            },
+            { 
+              title: "Priority", 
+              field: "priority",
+              render: rowData => "P2",
+            },
+            { 
+              title: "Mandatory/Optional",
+              field: "mandatory",
+              render: rowData => rowData.importance === "normal" ? "Mandatory" : "Optional",
+            },
+            {
+              title: "Work/Personal",
+              field: "work",
+              render: rowData => "Personal",
+            },
           ]}
           
           data={emailsArr}
